@@ -1,27 +1,30 @@
-import { useContext } from "react"
-import { usersContext } from "../App"
 import UserTableRow from "./userTableRow.jsx";
 
-function UserTable()
+function UserTable({Users,SetUsers})
 {
-    const {users}=useContext(usersContext);
-    const {setUsers}=useContext(usersContext);
+   
 
     function ToggleUserStatus(targetId){
-        const updatedArray=users=> users.map(user=>
+        const updatedArray=Users=> Users.map(user=>
             user.id===targetId? {...user,enable:!user.enable}:user
         );
-        setUsers(updatedArray);
+        SetUsers(updatedArray);
         
+    }
 
-
+    function ToggleUserRole(targetId,currentValue)
+    {
+        const updatedArray=Users=>Users.map(user=>
+            user.id===targetId?{...user,role:user.role===currentValue?"Admin":"User"}:user
+        )
+        SetUsers(updatedArray)
     }
 
 
 
     return(
-        <>
-            <table className="table">
+        <div className="p-4">
+            <table className="table border ">
                 <thead>
                     <tr>
                         <th>Name</th>
@@ -32,8 +35,8 @@ function UserTable()
                 </thead>
                 <tbody>
                     {
-                        users.map((user)=>
-                            <UserTableRow key={user.id} user={user} ToggleStatus={ToggleUserStatus}></UserTableRow>
+                        Users.map((user)=>
+                            <UserTableRow key={user.id} user={user} ToggleStatus={ToggleUserStatus} handleRoleChange={ToggleUserRole}></UserTableRow>
                         )
                     }
                     
@@ -41,7 +44,7 @@ function UserTable()
                     
                 </tbody>
             </table>
-        </>
+        </div>
     );
 
 }
