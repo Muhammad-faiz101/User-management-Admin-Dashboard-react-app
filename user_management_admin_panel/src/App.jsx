@@ -8,12 +8,18 @@ function App() {
 
   const [users,setUsers]=useState([
       {id:crypto.randomUUID(),name:"faiz", email:"muhammadfaiz6151@gmail.com",role:"Admin",enable:true},
-      {id:crypto.randomUUID(),name:"Ali", email:"Ali1111@gmail.com",role:"User",enable:false}
-  ])
+      {id:crypto.randomUUID(),name:"Ali", email:"Ali1111@gmail.com",role:"User",enable:false},
+      {id:crypto.randomUUID(),name:"Khabib", email:"khabib029@gmail.com",role:"User",enable:false},
+      {id:crypto.randomUUID(),name:"Steve", email:"steve531@gmail.com",role:"User",enable:false},
+      {id:crypto.randomUUID(),name:"Trump", email:"trump211@gmail.com",role:"User",enable:false}      
+    ])
+  
   const [searchInput,setSearchInput]=useState("");
   const filterdUsers=users.filter(user=>
-        user.name.toLowerCase().includes(searchInput.toLowerCase())
-            
+        user.name.toLowerCase().includes(searchInput.toLowerCase())||
+        user.email.toLowerCase().includes(searchInput.toLowerCase())||
+        user.role.toLowerCase().includes(searchInput.toLowerCase())||
+        (user.enable?"Enabled":"Disabled").toLowerCase().includes(searchInput.toLowerCase())
         )
       
   
