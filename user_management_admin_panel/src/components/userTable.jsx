@@ -1,8 +1,11 @@
+import { useState } from "react";
 import UserTableRow from "./userTableRow.jsx";
+import ConfirmationModal from "./statusConfirmationModal.jsx";
 
 function UserTable({Users,SetUsers})
 {
-   
+    const [modalShow,setModalShow]=useState(false);
+    const [selectedUser,setSelectedUser]=useState([]);
 
     function ToggleUserStatus(targetId){
         const updatedArray=Users=> Users.map(user=>
@@ -20,31 +23,38 @@ function UserTable({Users,SetUsers})
         SetUsers(updatedArray)
     }
 
+    function handleModalTrigger(user){
+        setSelectedUser(user)
+        setModalShow(true)
+    }
 
 
     return(
-        <div className="p-4">
-            <table className="table border ">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Email</th>
-                        <th>Role</th>
-                        <th>Status</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {
-                        Users.map((user)=>
-                            <UserTableRow key={user.id} user={user} ToggleStatus={ToggleUserStatus} handleRoleChange={ToggleUserRole}></UserTableRow>
-                        )
-                    }
-                    
-                       
-                    
-                </tbody>
-            </table>
-        </div>
+        <>
+            <div className="p-4">
+                <table className="table table-bordered align-middle text-center" >
+                    <thead>
+                        <tr className="table-dark">
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {
+                            Users.map((user)=>
+                                <UserTableRow key={user.id} user={user} ToggleStatus={ToggleUserStatus} handleRoleChange={ToggleUserRole} handleStatusClick={handleModalTrigger}></UserTableRow>
+                            )
+                        }
+                        
+                        
+                        
+                    </tbody>
+                </table>
+            </div>
+            <ConfirmationModal show={modalShow} user={selectedUser} ToggleStatus={ToggleUserStatus} onHide={()=> setModalShow(false)}></ConfirmationModal>
+        </>
     );
 
 }

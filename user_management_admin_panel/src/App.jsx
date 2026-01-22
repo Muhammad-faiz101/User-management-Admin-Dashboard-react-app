@@ -1,18 +1,19 @@
-import { createContext, useState } from "react"
+import { createContext, useEffect, useState } from "react"
 import Header from "./components/header"
 import SearchBar from "./components/searchBar"
 import UserTable from "./components/userTable";
 
 export const usersContext =createContext();
 function App() {
-
-  const [users,setUsers]=useState([
+  const usersData=localStorage.getItem("savedUsersData")
+  const [users,setUsers]=useState(()=> { return usersData?JSON.parse(usersData):
+    [
       {id:crypto.randomUUID(),name:"faiz", email:"muhammadfaiz6151@gmail.com",role:"Admin",enable:true},
       {id:crypto.randomUUID(),name:"Ali", email:"Ali1111@gmail.com",role:"User",enable:false},
       {id:crypto.randomUUID(),name:"Khabib", email:"khabib029@gmail.com",role:"User",enable:false},
       {id:crypto.randomUUID(),name:"Steve", email:"steve531@gmail.com",role:"User",enable:false},
       {id:crypto.randomUUID(),name:"Trump", email:"trump211@gmail.com",role:"User",enable:false}      
-    ])
+    ]})
   
   const [searchInput,setSearchInput]=useState("");
   const filterdUsers=users.filter(user=>
@@ -22,7 +23,9 @@ function App() {
         (user.enable?"Enabled":"Disabled").toLowerCase().includes(searchInput.toLowerCase())
         )
       
-  
+  useEffect(()=>
+    localStorage.setItem("savedUsersData",JSON.stringify(users))
+    ,[users])
 
   return (
     <>
@@ -30,6 +33,7 @@ function App() {
         <Header></Header>
         <SearchBar search={searchInput} setSearch={setSearchInput}></SearchBar>
         <UserTable Users={filterdUsers} SetUsers={setUsers}></UserTable>
+        
     
     </>
   )
