@@ -31,8 +31,8 @@ function UserTable({Users,SetUsers})
 
     return(
         <>
-            <div className="p-4">
-                <table className="table table-bordered align-middle text-center" >
+            <div className="table-responsive p-4">
+                <table className="table table-bordered align-middle text-center " >
                     <thead>
                         <tr className="table-dark">
                             <th>Name</th>

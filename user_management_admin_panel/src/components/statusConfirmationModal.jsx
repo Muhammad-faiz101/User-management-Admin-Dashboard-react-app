@@ -19,14 +19,14 @@ function ConfirmationModal({show,onHide,user,ToggleStatus}) {
         </Modal.Header>
 
         <Modal.Body>
-          Are your sure to disable {user.name}?
+                 Are your sure to disable {user.name}?
         </Modal.Body>
 
         <Modal.Footer>
-          <Button variant="secondary" onClick={onHide}>
+          <Button onClick={()=>handleConfirm(user)}>Yes</Button>
+          <Button variant="danger" onClick={onHide}>
             NO
           </Button>
-          <Button onClick={()=>handleConfirm(user)}>Yes</Button>
         </Modal.Footer>
       </Modal>
     </>

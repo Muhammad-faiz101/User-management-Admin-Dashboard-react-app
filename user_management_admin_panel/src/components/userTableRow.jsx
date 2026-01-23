@@ -9,7 +9,7 @@ function UserTableRow({user ,ToggleStatus,handleRoleChange,handleStatusClick})
      const handleModalShow = () => setShowModal(true);
 
 
-    const roleBtnColor=user.role==="Admin"?"#50d7f2":"#f26b50"
+    const roleBtnColor=user.role==="Admin"?"#55e4fe":"#FFD700"
     const statusBtnColor=user.enable?"black":"#adadad"
     return(
         <>
@@ -17,13 +17,13 @@ function UserTableRow({user ,ToggleStatus,handleRoleChange,handleStatusClick})
                 <td style={{color:statusBtnColor}}>{user.name}</td>
                 <td style={{color:statusBtnColor}}>{user.email}</td>
                 <td >
-                    <select className="rounded-pill w-auto text-center p-1"  style={{backgroundColor:roleBtnColor}} onChange={() =>handleRoleChange(user.id,"User")} value={user.role}>
+                    <select disabled={user.enable?false:true} className="rounded-pill w-auto text-center p-1"  style={{backgroundColor:roleBtnColor}} onChange={() =>handleRoleChange(user.id,"User")} value={user.role}>
                         <option value="Admin">Admin</option>
                         <option value="User">User</option>
                     </select>
                 </td>
                  
-            <td><button className="btn btn-info"  onClick={()=>
+            <td><button className="btn " style={{backgroundColor:user.enable?"#1ee664":"#f7000c",color:"white"}}  onClick={()=>
             {if(user.enable)
             {
                 handleStatusClick(user)
