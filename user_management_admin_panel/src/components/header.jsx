@@ -1,11 +1,13 @@
 function Header()
 {
     return(
-           <header class="bg-dark py-3">
-  <h4 class="text-center text-white fw-semibold mb-0">
-    Admin Dashboard
-  </h4>
-</header>
+           <header className="bg-dark py-3">
+            <div className="container-fluid">
+                <h4 className="text-center text-white fw-semibold mb-0">
+                    Admin Dashboard
+                </h4>
+            </div>
+           </header>
 
 
     );

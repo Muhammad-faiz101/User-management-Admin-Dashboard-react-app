@@ -15,7 +15,7 @@ function UserTableRow({user ,ToggleStatus,handleRoleChange,handleStatusClick})
         <>
             <tr>
                 <td style={{color:statusBtnColor}}>{user.name}</td>
-                <td style={{color:statusBtnColor}}>{user.email}</td>
+                <td style={{color:statusBtnColor}} className="text-break">{user.email}</td>
                 <td >
                     <select disabled={user.enable?false:true} className="rounded-pill w-auto text-center p-1"  style={{backgroundColor:roleBtnColor}} onChange={() =>handleRoleChange(user.id,"User")} value={user.role}>
                         <option value="Admin">Admin</option>
